@@ -34,28 +34,30 @@ export default function PrivacidadPage() {
       <section className="py-10 md:py-16 bg-surface">
         <div className="container-tight prose-agora">
           <div className="p-4 rounded-lg bg-accent-500/10 border border-accent-500/30 text-accent-700 mb-8 text-sm font-medium">
-            ⚠️ REVISAR DATOS LEGALES CON CLIENTE — Confirmar responsable del
-            tratamiento, delegado de protección de datos (si aplica), plazos
-            de conservación y encargados del tratamiento reales.
+            ⚠️ REVISAR CON CLIENTE — Confirmar delegado de protección de
+            datos (si aplica), plazos concretos de conservación y encargados
+            del tratamiento reales antes de publicar.
           </div>
 
           <h2>Responsable del tratamiento</h2>
           <ul>
             <li>
-              <strong>Titular:</strong> {site.legalName}{" "}
-              <em className="text-brand-700">(REVISAR CON CLIENTE)</em>
+              <strong>Titular:</strong> {site.legalName}
             </li>
             <li>
-              <strong>NIF/CIF:</strong>{" "}
-              <em className="text-brand-700">REVISAR CON CLIENTE</em>
+              <strong>NIF:</strong> {site.nif}
             </li>
             <li>
-              <strong>Domicilio:</strong> {site.address.street},{" "}
+              <strong>Domicilio:</strong> {site.address.streetLong},{" "}
               {site.address.postalCode} {site.address.city}.
             </li>
             <li>
-              <strong>Contacto:</strong>{" "}
+              <strong>Teléfono:</strong>{" "}
               <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a>
+            </li>
+            <li>
+              <strong>Correo electrónico:</strong>{" "}
+              <a href={`mailto:${site.email}`}>{site.email}</a>
             </li>
           </ul>
 

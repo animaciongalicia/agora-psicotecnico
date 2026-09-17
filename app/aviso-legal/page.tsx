@@ -34,23 +34,21 @@ export default function AvisoLegalPage() {
       <section className="py-10 md:py-16 bg-surface">
         <div className="container-tight prose-agora">
           <div className="p-4 rounded-lg bg-accent-500/10 border border-accent-500/30 text-accent-700 mb-8 text-sm font-medium">
-            ⚠️ REVISAR DATOS LEGALES CON CLIENTE — Sustituir CIF, razón social,
-            dirección fiscal, colegiación sanitaria y datos de contacto oficial
-            por los datos reales de {site.name}.
+            ⚠️ REVISAR CON CLIENTE — Confirmar denominación exacta de la
+            entidad titular y datos de inscripción sanitaria / registro
+            autonómico antes de publicar.
           </div>
 
           <h2>1. Datos identificativos</h2>
           <ul>
             <li>
-              <strong>Titular:</strong> {site.legalName}{" "}
-              <em className="text-brand-700">(REVISAR CON CLIENTE)</em>
+              <strong>Titular:</strong> {site.legalName}
             </li>
             <li>
-              <strong>NIF/CIF:</strong>{" "}
-              <em className="text-brand-700">REVISAR CON CLIENTE</em>
+              <strong>NIF:</strong> {site.nif}
             </li>
             <li>
-              <strong>Domicilio:</strong> {site.address.street},{" "}
+              <strong>Domicilio:</strong> {site.address.streetLong},{" "}
               {site.address.postalCode} {site.address.city}.
             </li>
             <li>
@@ -59,7 +57,7 @@ export default function AvisoLegalPage() {
             </li>
             <li>
               <strong>Correo electrónico:</strong>{" "}
-              <em className="text-brand-700">REVISAR CON CLIENTE</em>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
             </li>
             <li>
               <strong>Datos de inscripción sanitaria / registro autonómico:</strong>{" "}

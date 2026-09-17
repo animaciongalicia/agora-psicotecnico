@@ -4,6 +4,9 @@ import { useState, type FormEvent } from "react";
 import { site } from "@/content/site";
 import { services } from "@/content/services";
 
+const CONTACT_EMAIL =
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL || site.email;
+
 /**
  * Formulario de solicitud de cita.
  *
@@ -16,9 +19,6 @@ import { services } from "@/content/services";
  *   - Formspree/Basin/Getform/Web3Forms para no montar backend, o
  *   - WhatsApp Business / Calendly / Google Calendar según decida el cliente.
  */
-
-const CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL || "animaciongalicia@gmail.com";
 
 const bands = ["Mañana", "Mediodía", "Tarde", "Indiferente"] as const;
 

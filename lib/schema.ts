@@ -15,6 +15,7 @@ export function localBusinessSchema() {
     description: site.description,
     url: absoluteUrl("/"),
     telephone: site.phone.tel,
+    email: site.email,
     address: {
       "@type": "PostalAddress",
       streetAddress: site.address.street,

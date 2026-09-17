@@ -305,7 +305,7 @@ export default function RenovarCarnetPage() {
               <li className="flex gap-3">
                 <MapPinIcon className="w-5 h-5 text-brand-700 flex-shrink-0 mt-0.5" />
                 <span>
-                  {site.address.street}
+                  {site.address.streetLong}
                   <br />
                   {site.address.postalCode} {site.address.city}
                 </span>
@@ -321,9 +321,14 @@ export default function RenovarCarnetPage() {
               </li>
               <li className="flex gap-3">
                 <ClockIcon className="w-5 h-5 text-brand-700 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">
-                  Horario: <em className="text-brand-700">REVISAR CON CLIENTE</em>
-                </span>
+                <div className="text-sm space-y-0.5">
+                  {site.hours.display.map((h) => (
+                    <div key={h.days}>
+                      <span className="font-medium text-ink">{h.days}:</span>{" "}
+                      {h.hours}
+                    </div>
+                  ))}
+                </div>
               </li>
             </ul>
             <a

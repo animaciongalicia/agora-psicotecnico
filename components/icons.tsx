@@ -132,3 +132,12 @@ export const ConstructionIcon = (props: SVGProps<SVGSVGElement>) => (
     <path d="M17 14v7M7 14v7M17 18h5M2 18h5" />
   </svg>
 );
+
+export const DivingIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...props}>
+    <path d="M4 10a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3h-2l-2 2-2-2H7a3 3 0 0 1-3-3v-3z" />
+    <circle cx="9" cy="11.5" r="1.5" />
+    <circle cx="15" cy="11.5" r="1.5" />
+    <path d="M20 8h1a2 2 0 0 1 2 2v3" />
+  </svg>
+);

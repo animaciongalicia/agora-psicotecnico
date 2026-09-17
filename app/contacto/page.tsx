@@ -85,7 +85,7 @@ export default function ContactoPage() {
                   <div>
                     <div className="text-sm text-ink-muted">Dirección</div>
                     <div>
-                      {site.address.street}
+                      {site.address.streetLong}
                       <br />
                       {site.address.postalCode} {site.address.city}
                     </div>
@@ -102,6 +102,31 @@ export default function ContactoPage() {
                   </div>
                 </li>
                 <li className="flex gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-5 h-5 text-brand-700 flex-shrink-0 mt-0.5"
+                    aria-hidden
+                  >
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="M3 7l9 6 9-6" />
+                  </svg>
+                  <div>
+                    <div className="text-sm text-ink-muted">Correo</div>
+                    <a
+                      href={`mailto:${site.email}`}
+                      className="text-brand-800 hover:text-brand-900 font-medium break-all"
+                    >
+                      {site.email}
+                    </a>
+                  </div>
+                </li>
+                <li className="flex gap-3">
                   <ClockIcon className="w-5 h-5 text-brand-700 flex-shrink-0 mt-0.5" />
                   <div>
                     <div className="text-sm text-ink-muted">Horario</div>
@@ -112,9 +137,6 @@ export default function ContactoPage() {
                         </div>
                       ))}
                     </div>
-                    <p className="text-xs text-brand-700 mt-2 italic">
-                      Horario pendiente de confirmar con el cliente.
-                    </p>
                   </div>
                 </li>
               </ul>

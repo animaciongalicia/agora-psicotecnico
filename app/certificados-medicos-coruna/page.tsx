@@ -15,6 +15,7 @@ import {
   ConstructionIcon,
   ArrowRightIcon,
   StethoscopeIcon,
+  DivingIcon,
 } from "@/components/icons";
 import { CtaBlock } from "@/components/CtaBlock";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -35,6 +36,7 @@ const icons: Record<string, React.ReactElement> = {
   "certificado-medico-seguridad-privada-coruna": <ShieldIcon className="w-6 h-6" />,
   "certificado-medico-animales-potencialmente-peligrosos-coruna": <PawIcon className="w-6 h-6" />,
   "certificado-medico-operador-grua-coruna": <ConstructionIcon className="w-6 h-6" />,
+  "certificado-medico-buceo-coruna": <DivingIcon className="w-6 h-6" />,
 };
 
 const details: Record<string, string> = {
@@ -48,6 +50,8 @@ const details: Record<string, string> = {
     "Certificado de capacidad psicológica y física para la tenencia de animales potencialmente peligrosos (razas ANPP).",
   "certificado-medico-operador-grua-coruna":
     "Reconocimiento médico y psicotécnico para operadores de grúa torre y grúa móvil autopropulsada.",
+  "certificado-medico-buceo-coruna":
+    "Reconocimiento médico para buceo recreativo y profesional. Aptitud psicofísica del buceador según federaciones y escuelas.",
 };
 
 export default function CertificadosHubPage() {

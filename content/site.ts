@@ -5,7 +5,8 @@
 
 export const site = {
   name: "Psicotécnico Ágora",
-  legalName: "Psicotécnico Ágora", // REVISAR CON CLIENTE — razón social exacta
+  legalName: "Psicotécnico Ágora",
+  nif: "J-70367735",
   shortName: "Ágora",
   tagline: "Centro de reconocimientos médicos y psicotécnicos en A Coruña",
   description:
@@ -14,7 +15,8 @@ export const site = {
   locale: "es-ES",
 
   address: {
-    street: "Rúa Bolivia 1, esquina Avenida de Arteixo",
+    street: "Calle Bolivia, 1",
+    streetLong: "Calle Bolivia, 1 (esquina Avenida de Arteixo, frente a la Plaza del Libro)",
     postalCode: "15004",
     city: "A Coruña",
     region: "Galicia",
@@ -29,16 +31,25 @@ export const site = {
     tel: "+34881915396",
   },
 
-  // REVISAR HORARIO CON CLIENTE — placeholder editable
+  email: "info@agorapsicotecnico.com",
+
   hours: {
     display: [
-      { days: "Lunes a viernes", hours: "REVISAR CON CLIENTE" },
-      { days: "Sábados", hours: "REVISAR CON CLIENTE" },
-      { days: "Domingos y festivos", hours: "Cerrado" },
+      { days: "Lunes a viernes", hours: "9:00 – 13:30" },
+      { days: "Lunes, martes y jueves (tarde)", hours: "17:00 – 19:30" },
+      { days: "Sábados, domingos y festivos", hours: "Cerrado" },
     ],
-    // Formato schema.org (rellenar cuando esté confirmado)
     schema: [
-      // Ejemplo: { dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "09:00", closes: "20:00" }
+      {
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "13:30",
+      },
+      {
+        dayOfWeek: ["Monday", "Tuesday", "Thursday"],
+        opens: "17:00",
+        closes: "19:30",
+      },
     ] as Array<{ dayOfWeek: string[]; opens: string; closes: string }>,
   },
 

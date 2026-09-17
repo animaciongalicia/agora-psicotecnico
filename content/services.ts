@@ -119,6 +119,22 @@ export const services: Service[] = [
       "Reconocimiento médico y psicotécnico para operadores de grúa torre y grúa móvil autopropulsada.",
     keywords: ["certificado médico operador grúa Coruña", "psicotécnico grúa Coruña"],
   },
+  {
+    slug: "certificado-medico-buceo-coruna",
+    title: "Certificado médico para buceo en A Coruña",
+    shortTitle: "Buceo",
+    category: "certificado",
+    featured: false,
+    href: "/certificado-medico-buceo-coruna",
+    summary:
+      "Reconocimiento médico para buceo recreativo y profesional en A Coruña. Aptitud psicofísica para buceadores.",
+    keywords: [
+      "certificado médico buceo Coruña",
+      "reconocimiento médico buceo Coruña",
+      "aptitud buceo A Coruña",
+      "certificado buceo recreativo Coruña",
+    ],
+  },
 ];
 
 export function getService(slug: string): Service | undefined {

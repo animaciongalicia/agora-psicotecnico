@@ -6,7 +6,7 @@ import { services, getFeaturedServices, getSecondaryServices } from "@/content/s
 import { buildMetadata } from "@/lib/seo";
 import { faqSchema } from "@/lib/schema";
 
-import { PhoneIcon, CalendarIcon, CheckIcon, MapPinIcon, ClockIcon, ShieldIcon, ArrowRightIcon, CarIcon, StethoscopeIcon, HeartIcon, TargetIcon, AnchorIcon, PawIcon, ConstructionIcon } from "@/components/icons";
+import { PhoneIcon, CalendarIcon, CheckIcon, MapPinIcon, ClockIcon, ShieldIcon, ArrowRightIcon, CarIcon, StethoscopeIcon, HeartIcon, TargetIcon, AnchorIcon, PawIcon, ConstructionIcon, DivingIcon } from "@/components/icons";
 import { ServiceCard } from "@/components/ServiceCard";
 import { FaqList, type FaqItem } from "@/components/FaqList";
 import { CtaBlock } from "@/components/CtaBlock";
@@ -72,6 +72,7 @@ const serviceIcons: Record<string, React.ReactElement> = {
   "certificado-medico-seguridad-privada-coruna": <ShieldIcon className="w-6 h-6" />,
   "certificado-medico-animales-potencialmente-peligrosos-coruna": <PawIcon className="w-6 h-6" />,
   "certificado-medico-operador-grua-coruna": <ConstructionIcon className="w-6 h-6" />,
+  "certificado-medico-buceo-coruna": <DivingIcon className="w-6 h-6" />,
 };
 
 export default function HomePage() {
@@ -86,7 +87,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-gradient-to-b from-brand-50 via-surface to-surface">
         <div className="container py-12 md:py-20 grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <p className="chip mb-5">Centro autorizado · A Coruña</p>
+            <p className="chip mb-5">Centro autorizado · {site.address.city}</p>
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-[3.5rem] leading-tight text-ink mb-5">
               Renueva tu carnet de conducir en A Coruña
             </h1>
@@ -139,6 +140,27 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* BANDA DE CREDIBILIDAD ----------------------------- */}
+      <section className="bg-brand-900 text-brand-50 border-y border-brand-800">
+        <div className="container py-8 md:py-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+          {[
+            { n: "13+", label: "Años de experiencia" },
+            { n: "30-40", label: "Minutos por visita" },
+            { n: "0", label: "Viajes a Tráfico" },
+            { n: "Centro", label: "Autorizado A Coruña" },
+          ].map((s) => (
+            <div key={s.label}>
+              <div className="font-display font-bold text-3xl md:text-4xl text-white">
+                {s.n}
+              </div>
+              <div className="text-sm md:text-base text-brand-200 mt-1">
+                {s.label}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

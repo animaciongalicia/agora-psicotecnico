@@ -13,7 +13,11 @@ import { getAllPosts, getPostBySlug } from "@/lib/consejos";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBlock } from "@/components/CtaBlock";
 import { JsonLd } from "@/components/JsonLd";
-import { CalendarIcon, ArrowRightIcon } from "@/components/icons";
+import { CalendarIcon, ArrowRightIcon, ClockIcon } from "@/components/icons";
+import { TableOfContents } from "@/components/TableOfContents";
+import { ReadingProgress } from "@/components/ReadingProgress";
+import { RelatedPosts } from "@/components/RelatedPosts";
+import { Callout } from "@/components/Callout";
 import { site } from "@/content/site";
 
 type Params = { slug: string };
@@ -29,7 +33,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return buildMetadata({ title: "Artículo no encontrado", description: "", path: `/consejos/${slug}`, noindex: true });
+  if (!post)
+    return buildMetadata({
+      title: "Artículo no encontrado",
+      description: "",
+      path: `/consejos/${slug}`,
+      noindex: true,
+    });
   return buildMetadata({
     title: post.title,
     description: post.description,
@@ -46,31 +56,66 @@ const dateFmt = new Intl.DateTimeFormat("es-ES", {
 
 const mdxComponents = {
   h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h2 {...props} className="font-display font-bold text-3xl text-ink mt-12 mb-4 scroll-mt-24" />
+    <h2
+      {...props}
+      className="font-display font-bold text-3xl md:text-[2rem] text-ink mt-14 mb-5 scroll-mt-28 tracking-tight"
+    />
   ),
   h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3 {...props} className="font-display font-semibold text-2xl text-ink mt-8 mb-3 scroll-mt-24" />
+    <h3
+      {...props}
+      className="font-display font-semibold text-2xl text-ink mt-10 mb-3 scroll-mt-28"
+    />
   ),
   p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <p {...props} className="mb-4 text-ink-soft leading-relaxed text-lg" />
+    <p {...props} className="mb-5 text-ink-soft leading-[1.75] text-[1.125rem]" />
   ),
   ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul {...props} className="list-disc pl-6 mb-4 space-y-2 text-ink-soft text-lg leading-relaxed" />
+    <ul
+      {...props}
+      className="mb-6 space-y-2.5 text-ink-soft leading-relaxed text-[1.125rem] [&>li]:pl-2 [&>li]:relative [&>li]:list-disc marker:text-brand-500 pl-6"
+    />
   ),
   ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
-    <ol {...props} className="list-decimal pl-6 mb-4 space-y-2 text-ink-soft text-lg leading-relaxed" />
+    <ol
+      {...props}
+      className="mb-6 space-y-2.5 text-ink-soft leading-relaxed text-[1.125rem] list-decimal marker:text-brand-500 marker:font-semibold pl-6"
+    />
   ),
   a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
-    <a {...props} className="text-brand-700 underline underline-offset-2 hover:text-brand-800 font-medium" />
+    <a
+      {...props}
+      className="text-brand-700 underline decoration-brand-300 decoration-2 underline-offset-4 hover:decoration-brand-600 hover:text-brand-800 font-medium transition-colors"
+    />
   ),
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
     <strong {...props} className="text-ink font-semibold" />
   ),
-  blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
-    <blockquote {...props} className="border-l-4 border-brand-300 pl-4 italic text-ink-soft my-6" />
+  em: (props: React.HTMLAttributes<HTMLElement>) => (
+    <em {...props} className="text-ink-soft italic" />
   ),
-  hr: () => <hr className="border-line my-10" />,
+  blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
+    <blockquote
+      {...props}
+      className="border-l-4 border-accent-500 pl-5 py-1 my-8 text-lg italic text-ink font-display"
+    />
+  ),
+  hr: () => <hr className="border-line my-12" />,
+  code: (props: React.HTMLAttributes<HTMLElement>) => (
+    <code
+      {...props}
+      className="bg-brand-50 text-brand-800 px-1.5 py-0.5 rounded text-[0.95em] font-mono"
+    />
+  ),
+  Callout,
 };
+
+function readingMinutes(text: string): number {
+  const words = text.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 220));
+}
+
+const ARTICLE_ID = "post-body";
 
 export default async function PostPage({
   params,
@@ -82,9 +127,16 @@ export default async function PostPage({
   if (!post) notFound();
 
   const path = `/consejos/${post.slug}`;
+  const readMin = readingMinutes(post.body);
+
+  const others = getAllPosts()
+    .filter((p) => p.slug !== post.slug)
+    .slice(0, 3);
 
   return (
     <>
+      <ReadingProgress />
+
       <JsonLd
         data={[
           articleSchema({
@@ -112,48 +164,84 @@ export default async function PostPage({
             ]}
           />
         </div>
-        <div className="container pb-8 md:pb-12 max-w-3xl">
+        <div className="container pb-10 md:pb-14 max-w-4xl">
           {post.category && <p className="chip mb-4">{post.category}</p>}
-          <h1 className="font-display font-bold text-4xl md:text-5xl leading-tight text-ink mb-4">
+          <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.1] tracking-tight text-ink mb-5">
             {post.title}
           </h1>
-          <p className="text-lg md:text-xl text-ink-soft mb-4">
+          <p className="text-lg md:text-xl text-ink-soft mb-5 max-w-2xl">
             {post.description}
           </p>
-          <p className="inline-flex items-center gap-1.5 text-sm text-ink-muted">
-            <CalendarIcon className="w-4 h-4" />
-            Publicado el {dateFmt.format(new Date(post.date))} · Psicotécnico Ágora
-          </p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-muted">
+            <span className="inline-flex items-center gap-1.5">
+              <CalendarIcon className="w-4 h-4" />
+              Publicado el {dateFmt.format(new Date(post.date))}
+            </span>
+            <span aria-hidden className="text-line">·</span>
+            <span className="inline-flex items-center gap-1.5">
+              <ClockIcon className="w-4 h-4" />
+              {readMin} min de lectura
+            </span>
+            <span aria-hidden className="text-line">·</span>
+            <span>{site.name}</span>
+          </div>
         </div>
       </section>
 
       <article className="py-10 md:py-14 bg-surface">
-        <div className="container max-w-3xl">
-          <MDXRemote
-            source={post.body}
-            components={mdxComponents}
-            options={{
-              mdxOptions: {
-                remarkPlugins: [remarkGfm],
-                rehypePlugins: [
-                  rehypeSlug,
-                  [rehypeAutolinkHeadings, { behavior: "wrap" }],
-                ],
-              },
-            }}
-          />
+        <div className="container grid lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-14 xl:gap-20">
+          <div id={ARTICLE_ID} className="max-w-[68ch] mx-auto lg:mx-0">
+            <MDXRemote
+              source={post.body}
+              components={mdxComponents}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkGfm],
+                  rehypePlugins: [
+                    rehypeSlug,
+                    [rehypeAutolinkHeadings, { behavior: "wrap" }],
+                  ],
+                },
+              }}
+            />
 
-          <div className="mt-12 pt-8 border-t border-line">
-            <Link
-              href="/consejos"
-              className="inline-flex items-center gap-1 text-brand-700 font-semibold hover:text-brand-800"
-            >
-              <ArrowRightIcon className="w-4 h-4 rotate-180" />
-              Ver todos los consejos
-            </Link>
+            <div className="mt-14 p-6 md:p-8 rounded-2xl bg-brand-50 border border-brand-200">
+              <h3 className="font-display font-semibold text-xl text-ink mb-2">
+                ¿Necesitas resolver tu trámite?
+              </h3>
+              <p className="text-ink-soft mb-4">
+                Llámanos y en un minuto te decimos qué necesitas, cuánto tarda
+                y cuándo puedes venir.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link href="/contacto" className="btn-primary justify-center">
+                  Pedir cita
+                </Link>
+                <a
+                  href={`tel:${site.phone.tel}`}
+                  className="btn-outline justify-center"
+                >
+                  Llamar al {site.phone.display}
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-10 pt-6 border-t border-line">
+              <Link
+                href="/consejos"
+                className="inline-flex items-center gap-1.5 text-brand-700 font-semibold hover:text-brand-800"
+              >
+                <ArrowRightIcon className="w-4 h-4 rotate-180" />
+                Ver todos los consejos
+              </Link>
+            </div>
           </div>
+
+          <TableOfContents containerId={ARTICLE_ID} />
         </div>
       </article>
+
+      <RelatedPosts posts={others} />
 
       <CtaBlock
         title={`¿Te ayudamos con tu trámite en ${site.address.city}?`}

@@ -5,11 +5,12 @@ import { site } from "@/content/site";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 
-import { PhoneIcon, CalendarIcon, PawIcon } from "@/components/icons";
+import { PhoneIcon, CalendarIcon, PawIcon, ClockIcon } from "@/components/icons";
 import { FaqList, type FaqItem } from "@/components/FaqList";
 import { CtaBlock } from "@/components/CtaBlock";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
+import { ServiceStepsBlock, ChecklistBlock } from "@/components/ServiceStepsBlock";
 
 const PATH = "/certificado-medico-animales-potencialmente-peligrosos-coruna";
 
@@ -40,6 +41,21 @@ const faqs: FaqItem[] = [
     question: "¿Cuánto tiempo tarda el reconocimiento?",
     answer:
       "Alrededor de 30-40 minutos si vienes con cita previa. Sales con el certificado en mano.",
+  },
+  {
+    question: "¿La licencia me la da el ayuntamiento o vosotros?",
+    answer:
+      "La licencia la expide el ayuntamiento. Nosotros emitimos el certificado médico y psicotécnico que es uno de los requisitos exigidos. Además de eso, tu ayuntamiento pide otros documentos (seguro de responsabilidad civil, certificado de antecedentes penales, etc.).",
+  },
+  {
+    question: "¿Con qué frecuencia hay que renovar?",
+    answer:
+      "La licencia ANPP suele renovarse cada 5 años, aunque el plazo exacto lo fija cada ayuntamiento. El certificado médico se renueva junto con la licencia.",
+  },
+  {
+    question: "¿Necesito llevar al perro?",
+    answer:
+      "No. El reconocimiento se hace únicamente sobre la persona que va a ser titular de la licencia. El animal no interviene en la valoración.",
   },
 ];
 
@@ -77,7 +93,7 @@ export default function AnimalesPeligrososPage() {
         <div className="container pb-10 md:pb-14 grid lg:grid-cols-3 gap-8 items-center">
           <div className="lg:col-span-2">
             <p className="chip mb-4">A Coruña · Rúa Bolivia 1</p>
-            <h1 className="font-display font-bold text-4xl md:text-5xl text-ink mb-5">
+            <h1 className="font-display font-bold text-4xl md:text-5xl leading-tight text-ink mb-5">
               Certificado para animales potencialmente peligrosos (ANPP)
             </h1>
             <p className="text-lg md:text-xl text-ink-soft mb-6">
@@ -97,41 +113,133 @@ export default function AnimalesPeligrososPage() {
             </div>
           </div>
           <div className="hidden lg:flex items-center justify-center">
-            <div className="w-40 h-40 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center">
-              <PawIcon className="w-20 h-20" />
+            <div className="relative">
+              <div className="w-40 h-40 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center">
+                <PawIcon className="w-20 h-20" />
+              </div>
+              <div className="absolute -bottom-3 -right-3 bg-white rounded-xl shadow-lift border border-line px-3 py-2 flex items-center gap-1.5 text-brand-700 text-sm font-semibold">
+                <ClockIcon className="w-4 h-4" />
+                30-40 min
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section className="py-14 md:py-20 bg-surface">
+        <div className="container grid lg:grid-cols-[minmax(0,1fr)_360px] gap-10">
+          <ServiceStepsBlock
+            title="Cómo funciona"
+            intro="Cuatro pasos, una visita, un certificado listo para tu ayuntamiento."
+            steps={[
+              {
+                n: 1,
+                title: "Pide cita",
+                text: "Llama al 881 915 396 o rellena el formulario. Coméntanos si es la primera vez o una renovación.",
+              },
+              {
+                n: 2,
+                title: "Ven con tu DNI",
+                text: "Trae la licencia anterior si es renovación. Al perro no hace falta traerlo: el reconocimiento es solo sobre ti.",
+              },
+              {
+                n: 3,
+                title: "Reconocimiento en 30-40 min",
+                text: "Exploración médica, visión, audición y pruebas psicotécnicas específicas.",
+              },
+              {
+                n: 4,
+                title: "Certificado en mano",
+                text: "Sales del centro con el certificado firmado, listo para presentar en el ayuntamiento junto con el resto de documentación.",
+              },
+            ]}
+          />
+
+          <aside className="space-y-5">
+            <ChecklistBlock
+              title="Qué tienes que traer"
+              items={[
+                "DNI o NIE en vigor",
+                "Licencia anterior si es renovación",
+                "Informes médicos si tienes patologías relevantes",
+                "Gafas o lentillas si las usas",
+              ]}
+            />
+            <ChecklistBlock
+              title="Lo que pedirá el ayuntamiento"
+              tone="warn"
+              items={[
+                "Certificado médico y psicotécnico (este)",
+                "Certificado de antecedentes penales",
+                "Seguro de responsabilidad civil obligatorio",
+                "Alta del perro en el censo canino municipal",
+                "Documentación del microchip y cartilla veterinaria",
+              ]}
+            />
+          </aside>
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20 bg-surface-soft">
         <div className="container-tight prose-agora">
-          <h2>Qué incluye</h2>
+          <h2>Qué incluye el reconocimiento</h2>
           <ul>
-            <li>Reconocimiento médico general.</li>
+            <li>Reconocimiento médico general y anamnesis.</li>
             <li>Evaluación de capacidad visual y auditiva.</li>
             <li>Pruebas psicotécnicas: coordinación, atención, reacción.</li>
+            <li>Valoración de estabilidad emocional y aptitudes cognitivas.</li>
             <li>Certificado oficial firmado y sellado para tu ayuntamiento.</li>
           </ul>
 
-          <h2>Qué tienes que traer</h2>
+          <h2>Razas incluidas en la normativa nacional</h2>
+          <p>
+            El Real Decreto 287/2002 establece una lista general de razas
+            consideradas potencialmente peligrosas:
+          </p>
           <ul>
-            <li>DNI o NIE en vigor.</li>
-            <li>Licencia anterior, si es renovación.</li>
+            <li>Pit bull terrier</li>
+            <li>Staffordshire bull terrier</li>
+            <li>American Staffordshire terrier</li>
+            <li>Rottweiler</li>
+            <li>Dogo argentino</li>
+            <li>Fila brasileiro</li>
+            <li>Tosa inu</li>
+            <li>Akita inu</li>
           </ul>
+          <p>
+            Además, cada <strong>comunidad autónoma</strong> y{" "}
+            <strong>ayuntamiento</strong> puede añadir otras razas o cruces, y
+            también aplicar la normativa a perros que, por sus características
+            (peso, mandíbula, historial), sean considerados peligrosos aunque no
+            estén en la lista.
+          </p>
+
+          <h2>Y después del certificado, ¿qué?</h2>
+          <p>
+            Con el certificado en mano, el siguiente paso es solicitar la{" "}
+            <strong>licencia municipal ANPP</strong> en el Ayuntamiento de A
+            Coruña (o el que corresponda a tu domicilio). Además del certificado,
+            necesitarás el resto de documentación (seguro, antecedentes, censo)
+            que tienes listada en el bloque anterior.
+          </p>
+          <p>
+            La licencia se renueva habitualmente cada 5 años. Márcalo en el
+            calendario y renueva con margen para evitar problemas con las
+            autoridades locales.
+          </p>
 
           <p className="text-sm text-ink-muted mt-6">
             <em>
               La licencia municipal ANPP la expide tu ayuntamiento y suele
-              exigir, además del certificado médico y psicotécnico, un seguro
-              de responsabilidad civil y otros requisitos. Comprueba también con
-              tu ayuntamiento antes de completar el trámite.
+              exigir, además del certificado médico y psicotécnico, un seguro de
+              responsabilidad civil y otros requisitos. Comprueba también con tu
+              ayuntamiento antes de completar el trámite.
             </em>
           </p>
         </div>
       </section>
 
-      <section className="py-14 md:py-20 bg-surface-soft">
+      <section className="py-14 md:py-20 bg-surface">
         <div className="container-tight">
           <div className="mb-8">
             <p className="chip mb-4">Preguntas frecuentes</p>
