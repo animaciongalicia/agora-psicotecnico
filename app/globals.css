@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------------------------------------------------------
+   Sistema de diseño Ágora
+   Cambiar aquí = cambia en toda la web.
+   Colores en formato "R G B" (sin coma) para usar con rgb(var(--x))
+   -------------------------------------------------------------- */
+
+:root {
+  /* Marca — azul confianza sanitaria, no hospital
+     REVISAR CON CLIENTE si prefieren mantener los colores actuales de agorapsicotecnico.com */
+  --brand-50: 240 249 255;
+  --brand-100: 224 242 254;
+  --brand-200: 186 230 253;
+  --brand-300: 125 211 252;
+  --brand-400: 56 189 248;
+  --brand-500: 14 165 233;
+  --brand-600: 2 132 199;
+  --brand-700: 3 105 161;
+  --brand-800: 7 89 133;
+  --brand-900: 12 74 110;
+
+  /* Acento cálido para CTAs */
+  --accent-500: 234 88 12;
+  --accent-600: 217 70 5;
+  --accent-700: 194 65 12;
+
+  /* Tinta / textos */
+  --ink: 15 23 42;
+  --ink-soft: 51 65 85;
+  --ink-muted: 100 116 139;
+
+  /* Superficies */
+  --surface: 255 255 255;
+  --surface-soft: 248 250 252;
+  --surface-muted: 241 245 249;
+
+  /* Líneas */
+  --line: 226 232 240;
+
+  /* Tipografía — cargadas por next/font en layout */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Manrope", "Inter", system-ui, sans-serif;
+}
+
+/* Base ---------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  color: rgb(var(--ink));
+  background: rgb(var(--surface));
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selección */
+::selection {
+  background: rgb(var(--brand-200));
+  color: rgb(var(--brand-900));
+}
+
+/* Focus visible — accesible */
+:focus-visible {
+  outline: 3px solid rgb(var(--brand-500));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Utilidades --------------------------------------------------- */
+
+@layer components {
+  .container-tight {
+    @apply container max-w-5xl;
+  }
+
+  .prose-agora {
+    @apply text-ink-soft leading-relaxed;
+  }
+  .prose-agora h2 {
+    @apply text-3xl font-display font-bold text-ink mt-12 mb-4;
+  }
+  .prose-agora h3 {
+    @apply text-2xl font-display font-semibold text-ink mt-8 mb-3;
+  }
+  .prose-agora p {
+    @apply mb-4;
+  }
+  .prose-agora ul {
+    @apply list-disc pl-6 mb-4 space-y-2;
+  }
+  .prose-agora ol {
+    @apply list-decimal pl-6 mb-4 space-y-2;
+  }
+  .prose-agora a {
+    @apply text-brand-700 underline underline-offset-2 hover:text-brand-800;
+  }
+  .prose-agora strong {
+    @apply text-ink font-semibold;
+  }
+  .prose-agora blockquote {
+    @apply border-l-4 border-brand-300 pl-4 italic text-ink-soft my-6;
+  }
+
+  /* Botones ------------------------------------------------- */
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 font-semibold text-base transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2;
+    min-height: 48px; /* target táctil accesible */
+  }
+  .btn-primary {
+    @apply btn bg-accent-600 text-white shadow-soft hover:bg-accent-700 hover:shadow-card active:scale-[0.98];
+  }
+  .btn-secondary {
+    @apply btn bg-brand-700 text-white shadow-soft hover:bg-brand-800 hover:shadow-card active:scale-[0.98];
+  }
+  .btn-outline {
+    @apply btn border-2 border-brand-700 text-brand-800 hover:bg-brand-50 active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply btn text-brand-800 hover:bg-brand-50;
+  }
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+
+  /* Tarjetas ------------------------------------------------ */
+
+  .card {
+    @apply rounded-xl bg-surface border border-line shadow-soft transition-shadow;
+  }
+  .card-hover {
+    @apply card hover:shadow-card hover:border-brand-200;
+  }
+
+  /* Chips / badges ------------------------------------------ */
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-sm font-medium text-brand-800;
+  }
+}
+
+/* Reserva de espacio para la barra móvil inferior */
+@media (max-width: 767px) {
+  main {
+    padding-bottom: 5.5rem;
+  }
+}
+
+/* Reducir movimiento — respetar preferencia del usuario */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
