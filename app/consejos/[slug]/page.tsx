@@ -164,33 +164,35 @@ export default async function PostPage({
             ]}
           />
         </div>
-        <div className="container pb-10 md:pb-14 max-w-4xl">
-          {post.category && <p className="chip mb-4">{post.category}</p>}
-          <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.1] tracking-tight text-ink mb-5">
-            {post.title}
-          </h1>
-          <p className="text-lg md:text-xl text-ink-soft mb-5 max-w-2xl">
-            {post.description}
-          </p>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-muted">
-            <span className="inline-flex items-center gap-1.5">
-              <CalendarIcon className="w-4 h-4" />
-              Publicado el {dateFmt.format(new Date(post.date))}
-            </span>
-            <span aria-hidden className="text-line">·</span>
-            <span className="inline-flex items-center gap-1.5">
-              <ClockIcon className="w-4 h-4" />
-              {readMin} min de lectura
-            </span>
-            <span aria-hidden className="text-line">·</span>
-            <span>{site.name}</span>
+        <div className="container pb-10 md:pb-14">
+          <div className="max-w-3xl">
+            {post.category && <p className="chip mb-4">{post.category}</p>}
+            <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.1] tracking-tight text-ink mb-5">
+              {post.title}
+            </h1>
+            <p className="text-lg md:text-xl text-ink-soft mb-5">
+              {post.description}
+            </p>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-muted">
+              <span className="inline-flex items-center gap-1.5">
+                <CalendarIcon className="w-4 h-4" />
+                Publicado el {dateFmt.format(new Date(post.date))}
+              </span>
+              <span aria-hidden className="text-line">·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <ClockIcon className="w-4 h-4" />
+                {readMin} min de lectura
+              </span>
+              <span aria-hidden className="text-line">·</span>
+              <span>{site.name}</span>
+            </div>
           </div>
         </div>
       </section>
 
       <article className="py-10 md:py-14 bg-surface">
-        <div className="container grid lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-14 xl:gap-20">
-          <div id={ARTICLE_ID} className="max-w-[68ch] mx-auto lg:mx-0">
+        <div className="container xl:grid xl:grid-cols-[minmax(0,48rem)_240px] xl:gap-14 xl:justify-start">
+          <div id={ARTICLE_ID} className="max-w-3xl">
             <MDXRemote
               source={post.body}
               components={mdxComponents}

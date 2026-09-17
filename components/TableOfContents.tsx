@@ -53,7 +53,7 @@ export function TableOfContents({ containerId }: { containerId: string }) {
   if (items.length < 3) return null;
 
   return (
-    <aside className="hidden lg:block" aria-label="En esta página">
+    <aside className="hidden xl:block" aria-label="En esta página">
       <div className="sticky top-24">
         <div className="text-xs font-semibold uppercase tracking-wider text-ink-muted mb-3">
           En esta página
