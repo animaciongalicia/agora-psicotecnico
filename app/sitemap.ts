@@ -1,13 +1,10 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
+import { getAllPosts } from "@/lib/consejos";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || site.url;
 
-/**
- * Sitemap dinámico. Las páginas de consejos se añaden en el Paso 3
- * leyendo el frontmatter de los .mdx.
- */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
@@ -27,5 +24,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: s.featured ? 0.9 : 0.7,
   }));
 
-  return [...staticRoutes, ...serviceRoutes];
+  const postRoutes: MetadataRoute.Sitemap = getAllPosts().map((p) => ({
+    url: `${SITE_URL}/consejos/${p.slug}`,
+    lastModified: new Date(p.date),
+    changeFrequency: "yearly",
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...postRoutes];
 }
