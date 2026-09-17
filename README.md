@@ -169,6 +169,46 @@ Todos marcados en el código con `REVISAR CON CLIENTE`:
 
 ---
 
+## Checklist antes de publicar
+
+Datos y contenido:
+
+- [ ] Confirmar horario real y editarlo en `content/site.ts` → `hours`.
+- [ ] Sustituir CIF/razón social en `content/site.ts` y páginas legales.
+- [ ] Añadir email real de contacto en `.env` (`NEXT_PUBLIC_CONTACT_EMAIL`) o cambiar el formulario a servicio final.
+- [ ] Sustituir todos los `<PagePlaceholder>` por fotografías reales optimizadas (`public/img/`).
+- [ ] Integrar reseñas reales de Google (en la Home, sección de confianza).
+- [ ] Confirmar coordenadas exactas del local para el mapa.
+- [ ] Decidir si se ofrece "recuperación de puntos" y añadir la página si procede.
+
+Infraestructura:
+
+- [ ] Crear cuenta / conectar Vercel al repositorio.
+- [ ] Añadir variables de entorno (mínimo `NEXT_PUBLIC_SITE_URL`).
+- [ ] Añadir dominio `agorapsicotecnico.com` y `www.agorapsicotecnico.com`.
+- [ ] Actualizar DNS del dominio según instrucciones de Vercel.
+- [ ] Crear propiedad en Google Search Console y verificar (via metatag o DNS).
+- [ ] Subir sitemap `https://agorapsicotecnico.com/sitemap.xml` en GSC.
+- [ ] Crear propiedad de Google Analytics 4 y poner el ID en `NEXT_PUBLIC_GA_ID`.
+- [ ] Enlazar la ficha de Google Business con el nuevo sitio.
+
+Integraciones opcionales:
+
+- [ ] Sustituir el formulario `mailto:` por Formspree, Resend, Web3Forms, etc.
+- [ ] Integrar sistema de cita real (Calendly, Google Calendar, WhatsApp Business).
+- [ ] Widget/API de reseñas de Google en la sección de confianza.
+
+Verificación final:
+
+- [ ] `npm run build` sin errores.
+- [ ] `npm run typecheck` sin errores.
+- [ ] `npm run lint` sin warnings.
+- [ ] Verificar Lighthouse en producción (móvil y desktop).
+- [ ] Comprobar responsive en móvil real (no solo emulador).
+- [ ] Comprobar Rich Results con la herramienta de Google (schema.org).
+
+---
+
 ## Licencia y atribución
 
 Código propiedad de Psicotécnico Ágora.
