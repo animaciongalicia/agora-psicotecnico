@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
+import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getAllPosts } from "@/lib/consejos";
 import { ArrowRightIcon, CalendarIcon } from "@/components/icons";
 import { CtaBlock } from "@/components/CtaBlock";
+import { JsonLd } from "@/components/JsonLd";
 
 const PATH = "/consejos";
 
@@ -27,6 +29,22 @@ export default function ConsejosIndex() {
 
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbSchema([
+            { name: "Inicio", href: "/" },
+            { name: "Consejos", href: PATH },
+          ]),
+          itemListSchema(
+            posts.map((p) => ({
+              name: p.title,
+              href: `/consejos/${p.slug}`,
+              description: p.description,
+              datePublished: p.date,
+            })),
+          ),
+        ]}
+      />
       <section className="bg-gradient-to-b from-brand-50 to-surface">
         <div className="container py-8">
           <Breadcrumbs

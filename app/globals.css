@@ -59,7 +59,18 @@ body {
   font-family: var(--font-sans);
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  line-height: 1.6;
+}
+
+/* Ritmo vertical global — headings más apretados, cuerpo más aireado */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+p {
+  line-height: 1.65;
 }
 
 /* Selección */
@@ -83,31 +94,40 @@ body {
   }
 
   .prose-agora {
-    @apply text-ink-soft leading-relaxed;
+    @apply text-ink-soft;
+    font-size: 1.125rem;
+    line-height: 1.75;
   }
   .prose-agora h2 {
-    @apply text-3xl font-display font-bold text-ink mt-12 mb-4;
+    @apply text-3xl md:text-[2rem] font-display font-bold text-ink mt-12 mb-4 tracking-tight;
+    line-height: 1.2;
   }
   .prose-agora h3 {
-    @apply text-2xl font-display font-semibold text-ink mt-8 mb-3;
+    @apply text-2xl font-display font-semibold text-ink mt-10 mb-3;
+    line-height: 1.25;
   }
   .prose-agora p {
-    @apply mb-4;
+    @apply mb-5;
+    line-height: 1.75;
   }
   .prose-agora ul {
-    @apply list-disc pl-6 mb-4 space-y-2;
+    @apply list-disc pl-6 mb-5 space-y-2.5 marker:text-brand-500;
   }
   .prose-agora ol {
-    @apply list-decimal pl-6 mb-4 space-y-2;
+    @apply list-decimal pl-6 mb-5 space-y-2.5 marker:text-brand-500 marker:font-semibold;
+  }
+  .prose-agora li {
+    line-height: 1.7;
   }
   .prose-agora a {
-    @apply text-brand-700 underline underline-offset-2 hover:text-brand-800;
+    @apply text-brand-700 underline decoration-brand-300 decoration-2 underline-offset-4 hover:decoration-brand-600 hover:text-brand-800 font-medium transition-colors;
   }
   .prose-agora strong {
     @apply text-ink font-semibold;
   }
   .prose-agora blockquote {
-    @apply border-l-4 border-brand-300 pl-4 italic text-ink-soft my-6;
+    @apply border-l-4 border-accent-500 pl-5 py-1 italic text-ink my-8 font-display;
+    line-height: 1.5;
   }
 
   /* Botones ------------------------------------------------- */

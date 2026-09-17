@@ -8,7 +8,7 @@ import { MobileBottomBar } from "@/components/MobileBottomBar";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Analytics } from "@/components/Analytics";
 import { JsonLd } from "@/components/JsonLd";
-import { localBusinessSchema, organizationSchema } from "@/lib/schema";
+import { localBusinessSchema, organizationSchema, webSiteSchema } from "@/lib/schema";
 import { site } from "@/content/site";
 
 const inter = Inter({
@@ -33,8 +33,11 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
-  authors: [{ name: site.name }],
+  authors: [{ name: site.name, url: SITE_URL }],
+  creator: site.name,
+  publisher: site.name,
   generator: "Next.js",
+  category: "Health",
   keywords: [
     "psicotécnico Coruña",
     "psicotécnico A Coruña",
@@ -43,7 +46,23 @@ export const metadata: Metadata = {
     "reconocimiento médico Coruña",
     "certificado médico Coruña",
     "centro reconocimiento conductores Coruña",
+    "licencia armas Coruña",
+    "certificado buceo Coruña",
   ],
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
+  alternates: {
+    canonical: SITE_URL,
+    types: {
+      "text/plain": [
+        { url: "/llms.txt", title: "llms.txt" },
+        { url: "/llms-full.txt", title: "llms-full.txt" },
+      ],
+    },
+  },
   robots: {
     index: true,
     follow: true,
@@ -105,7 +124,7 @@ export default function RootLayout({
         <MobileBottomBar />
         <CookieBanner />
         <Analytics />
-        <JsonLd data={[localBusinessSchema(), organizationSchema()]} />
+        <JsonLd data={[localBusinessSchema(), organizationSchema(), webSiteSchema()]} />
       </body>
     </html>
   );

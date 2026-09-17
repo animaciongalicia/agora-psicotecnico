@@ -16,7 +16,7 @@ import { JsonLd } from "@/components/JsonLd";
 export const metadata: Metadata = buildMetadata({
   title: "Psicotécnico en A Coruña · Renovar el carnet de conducir",
   description:
-    "Renueva tu carnet de conducir en A Coruña sin complicaciones. Reconocimiento médico y psicotécnico, fotografía y tramitación en un único centro. Más de 13 años de experiencia. Rúa Bolivia 1, A Coruña.",
+    "Renueva tu carnet de conducir en A Coruña sin complicaciones. Reconocimiento médico, fotografía y tramitación en el mismo centro. Cita al 881 915 396.",
   path: "/",
 });
 

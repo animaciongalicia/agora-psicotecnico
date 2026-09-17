@@ -17,7 +17,7 @@ const PATH = "/renovar-carnet-conducir-coruna";
 export const metadata: Metadata = buildMetadata({
   title: "Renovar el carnet de conducir en A Coruña · Psicotécnico Ágora",
   description:
-    "Renovación del permiso de conducir en A Coruña: reconocimiento médico y psicotécnico, fotografía y tramitación con la DGT en una sola visita. Rúa Bolivia 1, A Coruña. Cita al 881 915 396.",
+    "Renovación del carnet en A Coruña: reconocimiento médico y psicotécnico, foto y tramitación con la DGT en una visita. Cita al 881 915 396.",
   path: PATH,
 });
 

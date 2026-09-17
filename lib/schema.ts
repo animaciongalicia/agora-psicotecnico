@@ -1,4 +1,5 @@
 import { site } from "@/content/site";
+import { services } from "@/content/services";
 import { absoluteUrl } from "./seo";
 
 /**
@@ -40,6 +41,21 @@ export function localBusinessSchema() {
       opens: h.opens,
       closes: h.closes,
     })),
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Servicios de reconocimiento médico y psicotécnico",
+      itemListElement: services.map((s) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: s.shortTitle,
+          url: absoluteUrl(s.href),
+          description: s.summary,
+        },
+      })),
+    },
+    knowsLanguage: ["es-ES", "gl-ES"],
+    slogan: site.tagline,
   };
 }
 
@@ -50,8 +66,31 @@ export function organizationSchema() {
     "@id": `${absoluteUrl("/")}#organization`,
     name: site.name,
     url: absoluteUrl("/"),
-    logo: absoluteUrl("/logo.png"),
+    logo: absoluteUrl("/icon.svg"),
     telephone: site.phone.tel,
+    email: site.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      postalCode: site.address.postalCode,
+      addressLocality: site.address.city,
+      addressRegion: site.address.region,
+      addressCountry: site.address.country,
+    },
+    taxID: site.nif,
+  };
+}
+
+export function webSiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${absoluteUrl("/")}#website`,
+    url: absoluteUrl("/"),
+    name: site.name,
+    description: site.description,
+    inLanguage: "es-ES",
+    publisher: { "@id": `${absoluteUrl("/")}#organization` },
   };
 }
 
@@ -90,6 +129,7 @@ export function faqSchema(faqs: Array<{ question: string; answer: string }>) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    inLanguage: "es-ES",
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.question,
@@ -98,6 +138,10 @@ export function faqSchema(faqs: Array<{ question: string; answer: string }>) {
         text: f.answer,
       },
     })),
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h2", "h3"],
+    },
   };
 }
 
@@ -109,17 +153,46 @@ export function articleSchema(opts: {
   dateModified?: string;
   image?: string;
 }) {
+  const image = opts.image ? absoluteUrl(opts.image) : absoluteUrl("/opengraph-image");
   return {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: opts.title,
     description: opts.description,
     url: absoluteUrl(opts.href),
+    mainEntityOfPage: absoluteUrl(opts.href),
     datePublished: opts.datePublished,
     dateModified: opts.dateModified ?? opts.datePublished,
-    image: opts.image ? absoluteUrl(opts.image) : undefined,
-    author: { "@type": "Organization", name: site.name },
+    image,
+    inLanguage: "es-ES",
+    author: {
+      "@type": "Organization",
+      name: site.name,
+      url: absoluteUrl("/"),
+    },
     publisher: { "@id": `${absoluteUrl("/")}#organization` },
+    isPartOf: { "@id": `${absoluteUrl("/")}#website` },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "h2", "p"],
+    },
+  };
+}
+
+export function itemListSchema(
+  items: Array<{ name: string; href: string; description?: string; datePublished?: string }>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: absoluteUrl(item.href),
+      name: item.name,
+      ...(item.description ? { description: item.description } : {}),
+      ...(item.datePublished ? { datePublished: item.datePublished } : {}),
+    })),
   };
 }
 

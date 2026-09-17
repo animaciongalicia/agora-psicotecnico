@@ -26,7 +26,7 @@ const PATH = "/certificados-medicos-coruna";
 export const metadata: Metadata = buildMetadata({
   title: "Certificados médicos y psicotécnicos en A Coruña",
   description:
-    "Certificados médicos y psicotécnicos en A Coruña para licencia de armas, titulaciones náuticas, seguridad privada, animales potencialmente peligrosos y operadores de grúa.",
+    "Certificados médicos oficiales en A Coruña: licencia de armas, náutica, seguridad privada, animales peligrosos, grúas y buceo. Cita al 881 915 396.",
   path: PATH,
 });
 
